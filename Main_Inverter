@@ -1,0 +1,59 @@
+from PIL import Image, ImageDraw
+import sys, os.path,re
+
+def image_inverter():
+
+    # while True:
+    #     correct_directory = str(input("Is image in the same folder as this python file? (Y/N) "))
+    #     if correct_directory == "Y":
+    #         break
+    #     elif correct_directory == "N":
+    #         print ("Please place image in the same location as this script.")
+    #         sys.exit()
+    #     else:
+    #         print("I do not understand the command.")
+    #         print()
+
+    img_name = "doge" #str(input("What is the image name? "))
+
+    folder_location = os.listdir()
+
+    for files in folder_location:
+        if img_name in files:
+            img_ext = files
+            break
+
+    img = Image.open(os.path.join(str(img_ext)))
+
+    # print (folder_location)
+    # print(img_ext)
+    # print(img)
+
+    w,h = img.size
+
+    pix_rgb = img.getpixel((0,0))
+
+    pix_r, pix_g, pix_b = pix_rgb[0],pix_rgb[1],pix_rgb[2]
+
+    new_image = Image.new("RGB", img.size, (255,255,255))
+    d = ImageDraw.Draw(new_image)
+    d.ellipse((100,100,300,300), fill=(0,0,0))
+    d.point([0,0], fill=(180,180,180))
+
+
+
+    print (w,h)
+
+    print (list(pix_rgb))
+
+    print(pix_r, pix_g, pix_b)
+
+    new_image.show()
+
+    print ()
+
+
+
+
+
+image_inverter()
