@@ -1,5 +1,7 @@
+# Working Prototype
+
 from PIL import Image, ImageDraw
-import sys, os.path,re
+import sys, os.path,re, numpy
 
 def image_inverter():
 
@@ -38,6 +40,17 @@ def image_inverter():
     new_image = Image.new("RGB", img.size, (255,255,255))
     d = ImageDraw.Draw(new_image)
     d.ellipse((100,100,300,300), fill=(0,0,0))
+
+    for i in range(w):
+        for j in range(h):
+            pixel = img.getpixel((i,j))
+            pix_array = numpy.array(pixel)
+            inverted = 255 - pix_array
+            d.point([i,j], fill = tuple(inverted))
+            print(pix_array,i,j)
+            print(inverted)
+
+
     d.point([0,0], fill=(180,180,180))
 
 
@@ -50,7 +63,6 @@ def image_inverter():
 
     new_image.show()
 
-    print ()
 
 
 
